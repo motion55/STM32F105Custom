@@ -44,6 +44,7 @@
 #include "usbd_def.h"
 #include "usbd_desc.h"
 #include "usbd_custom.h"
+#include "usbd_conf.h"
 
 /* USER CODE END Includes */
 
