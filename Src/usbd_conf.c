@@ -39,12 +39,10 @@
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-
+extern PCD_HandleTypeDef hpcd_USB_OTG_FS;
 /* USER CODE END PV */
 
 /* USER CODE BEGIN 0 */
-PCD_HandleTypeDef hpcd_USB_OTG_FS;
-
 void _Error_Handler(char * file, int line);
 /* USER CODE END 0 */
 

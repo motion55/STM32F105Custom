@@ -51,7 +51,7 @@
 /* Private variables ---------------------------------------------------------*/
 UART_HandleTypeDef huart1;
 
-//PCD_HandleTypeDef hpcd_USB_OTG_FS;
+PCD_HandleTypeDef hpcd_USB_OTG_FS;
 
 /* USER CODE BEGIN PV */
 /* USB Device Core handle declaration. */
@@ -61,7 +61,7 @@ USBD_HandleTypeDef hUsbDeviceFS;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-//static void MX_USB_OTG_FS_PCD_Init(void);
+static void MX_USB_OTG_FS_PCD_Init(void);
 static void MX_USART1_UART_Init(void);
 
 /* USER CODE BEGIN PFP */
@@ -102,7 +102,6 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  //MX_USB_OTG_FS_PCD_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   USBD_Init(&hUsbDeviceFS, &FS_Desc, DEVICE_FS);
@@ -116,6 +115,8 @@ int main(void)
   {
 
   /* USER CODE END WHILE */
+
+  /* USER CODE BEGIN 3 */
 	  for (int i = 5; i < 20;) {
 		  i++;
 		  int delay_val = 2000/i;
@@ -126,8 +127,6 @@ int main(void)
 			  HAL_Delay(delay_val);
 		  }
 	  }
-  /* USER CODE BEGIN 3 */
-
   }
   /* USER CODE END 3 */
 
@@ -215,7 +214,7 @@ static void MX_USART1_UART_Init(void)
   }
 
 }
-#if 0
+
 /* USB_OTG_FS init function */
 static void MX_USB_OTG_FS_PCD_Init(void)
 {
@@ -231,8 +230,9 @@ static void MX_USB_OTG_FS_PCD_Init(void)
   {
     _Error_Handler(__FILE__, __LINE__);
   }
+
 }
-#endif
+
 /** Configure pins as 
         * Analog 
         * Input 
