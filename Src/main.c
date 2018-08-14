@@ -117,6 +117,7 @@ int main(void)
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
+#if 0
 	  for (int i = 5; i < 20;) {
 		  i++;
 		  int delay_val = 2000/i;
@@ -127,6 +128,7 @@ int main(void)
 			  HAL_Delay(delay_val);
 		  }
 	  }
+#endif
   }
   /* USER CODE END 3 */
 

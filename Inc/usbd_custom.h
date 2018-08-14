@@ -79,7 +79,7 @@
 
 #define USB_VENDOR_CONFIG_DESC_SIZ       	(9 + USBD_VENDOR_EXT_DESC_SIZ + USBD_VENDOR_FUNC_DESC_SIZ)
 #define USB_VENDOR_DESC_SIZ                	9
-#define VENDOR_DESCRIPTOR_TYPE            	0x21
+#define VENDOR_DESCRIPTOR_TYPE            	0xFF
 
 /**
   * @}

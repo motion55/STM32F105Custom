@@ -66,8 +66,8 @@
 #define USBD_VENDOR_MAX_ITF_NUM      		1
 #define USBD_VENDOR_XFER_SIZE           	1024
 
-#define VENDOR_EP_BULK_IN	0x81
-#define VENDOR_EP_BULK_OUT	0x02
+#define VENDOR_EP_BULK_IN	VENDOR_IN_EP
+#define VENDOR_EP_BULK_OUT	VENDOR_OUT_EP
 
 #define FS_MAX_PACKET_SIZE                 64  /* Endpoint IN & OUT Packet size */
 

@@ -403,9 +403,14 @@ static uint8_t  USBD_VENDOR_EP0_TxReady (USBD_HandleTypeDef *pdev)
   * @param  pdev: device instance
   * @retval status
   */
+static uint16_t SOF_count = 100;
 static uint8_t  USBD_VENDOR_SOF (USBD_HandleTypeDef *pdev)
 {
-
+	SOF_count--;
+	if (!SOF_count) {
+		HAL_GPIO_TogglePin(LED_Output_GPIO_Port, LED_Output_Pin);
+		SOF_count = 200;
+	}
   return USBD_OK;
 }
 /**
