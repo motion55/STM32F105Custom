@@ -61,7 +61,7 @@ USBD_HandleTypeDef hUsbDeviceFS;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-//static void MX_USB_OTG_FS_PCD_Init(void);
+static void MX_USB_OTG_FS_PCD_Init(void);
 static void MX_USART1_UART_Init(void);
 
 /* USER CODE BEGIN PFP */
@@ -214,7 +214,7 @@ static void MX_USART1_UART_Init(void)
   }
 
 }
-#if 0
+
 /* USB_OTG_FS init function */
 static void MX_USB_OTG_FS_PCD_Init(void)
 {
@@ -232,7 +232,7 @@ static void MX_USB_OTG_FS_PCD_Init(void)
   }
 
 }
-#endif
+
 /** Configure pins as 
         * Analog 
         * Input 
