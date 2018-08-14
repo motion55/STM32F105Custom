@@ -210,7 +210,7 @@ static uint8_t  USBD_VENDOR_Init (USBD_HandleTypeDef *pdev,
                                uint8_t cfgidx)
 {
 	uint8_t ret = 0;
-	USBD_VENDOR_HandleTypeDef *hcdc;
+	USBD_VENDOR_HandleTypeDef *hVendor;
 
 	if (pdev->dev_speed == USBD_SPEED_HIGH) {
 		/* Open EP IN */
@@ -236,22 +236,22 @@ static uint8_t  USBD_VENDOR_Init (USBD_HandleTypeDef *pdev,
 	if (pdev->pClassData == NULL) {
 		ret = 1;
 	} else {
-		hcdc = (USBD_VENDOR_HandleTypeDef*) pdev->pClassData;
+		hVendor = (USBD_VENDOR_HandleTypeDef*) pdev->pClassData;
 
 		/* Init  physical Interface components */
 		//((USBD_VENDOR_ItfTypeDef *) pdev->pUserData)->Init();
 
 		/* Init Xfer states */
-		hcdc->TxState = 0;
-		hcdc->RxState = 0;
+		hVendor->TxState = 0;
+		hVendor->RxState = 0;
 
 		if (pdev->dev_speed == USBD_SPEED_HIGH) {
 			/* Prepare Out endpoint to receive next packet */
-			USBD_LL_PrepareReceive(pdev, VENDOR_OUT_EP, hcdc->RxBuffer,
+			USBD_LL_PrepareReceive(pdev, VENDOR_OUT_EP, hVendor->RxBuffer,
 			VENDOR_DATA_HS_OUT_PACKET_SIZE);
 		} else {
 			/* Prepare Out endpoint to receive next packet */
-			USBD_LL_PrepareReceive(pdev, VENDOR_OUT_EP, hcdc->RxBuffer,
+			USBD_LL_PrepareReceive(pdev, VENDOR_OUT_EP, hVendor->RxBuffer,
 			VENDOR_DATA_FS_OUT_PACKET_SIZE);
 		}
 	}
@@ -442,8 +442,22 @@ static uint8_t  USBD_VENDOR_IsoOutIncomplete (USBD_HandleTypeDef *pdev, uint8_t 
 static uint8_t  USBD_VENDOR_DataOut (USBD_HandleTypeDef *pdev, 
                               uint8_t epnum)
 {
+	if (pdev->pClassData != NULL) {
+		USBD_VENDOR_HandleTypeDef *hVendor =
+				(USBD_VENDOR_HandleTypeDef*) pdev->pClassData;
 
-  return USBD_OK;
+		/* Get the received data length */
+		hVendor->RxLength = USBD_LL_GetRxDataSize(pdev, epnum);
+
+		/* USB data will be immediately processed, this allow next USB traffic being
+		 NAKed till the end of the application Xfer */
+		USBD_LL_PrepareReceive(pdev, VENDOR_OUT_EP, hVendor->RxBuffer,
+				VENDOR_DATA_FS_OUT_PACKET_SIZE);
+
+		return USBD_OK;
+	} else {
+		return USBD_FAIL;
+	}
 }
 
 /**
