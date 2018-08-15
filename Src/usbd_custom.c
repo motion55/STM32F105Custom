@@ -456,10 +456,12 @@ static uint8_t  USBD_VENDOR_DataOut (USBD_HandleTypeDef *pdev,
 
 		/* USB data will be immediately processed, this allow next USB traffic being
 		 NAKed till the end of the application Xfer */
-		USBD_LL_PrepareReceive(pdev, VENDOR_OUT_EP, hVendor->RxBuffer,
-				VENDOR_DATA_FS_OUT_PACKET_SIZE);
-
+		USBD_LL_PrepareReceive(pdev, VENDOR_OUT_EP, hVendor->RxBuffer, VENDOR_DATA_FS_OUT_PACKET_SIZE);
+	#ifdef USB_RECEIVE
+		USB_RECEIVE(hVendor->RxBuffer, hVendor->RxLength);
+	#endif
 		return USBD_OK;
+
 	} else {
 		return USBD_FAIL;
 	}
