@@ -156,7 +156,7 @@ static uint8_t USBD_VENDOR_CfgDesc[USB_VENDOR_CONFIG_DESC_SIZ] =
   USB_VENDOR_CONFIG_DESC_SIZ,
   /* wTotalLength: Bytes returned */
   0x00,
-  0x01,         /*bNumInterfaces: 1 interface*/
+  USBD_MAX_NUM_INTERFACES,     /*bNumInterfaces: 1 interface*/
   0x01,         /*bConfigurationValue: Configuration value*/
   0x02,         /*iConfiguration: Index of string descriptor describing the configuration*/
   0xC0,         /*bmAttributes: bus powered and Supports Remote Wakeup */
